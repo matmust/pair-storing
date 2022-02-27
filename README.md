@@ -1,9 +1,7 @@
 # pair-storing
 simple in-memory database
 
-[![Build Status](https://travis-ci.org/matmust/pair-storing.svg?branch=master)](https://travis-ci.org/matmust/pair-storing)
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](https://godoc.org/github.com/matmust/pair-storing)
-[![Go Report Card](https://goreportcard.com/badge/github.com/matmust/pair-storing)](https://goreportcard.com/report/github.com/matmust/pair-storing)
 [![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](LICENSE)
 ![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)
 
