@@ -16,8 +16,9 @@ import (
 )
 
 const (
-	defultFilePath = "./tmp/data.json"
-	defaultPort    = "9000"
+	defaultFilePath = "../../tmp"
+	defaultFilename = "/data.json"
+	defaultPort     = "9000"
 )
 
 func main() {
@@ -29,7 +30,7 @@ func main() {
 	flag.Parse()
 
 	r := inmem.NewPairRepository()
-	fileStorage := storage.NewFileStorage(defultFilePath, r)
+	fileStorage := storage.NewFileStorage(defaultFilePath, defaultFilename, r)
 
 	fileStorage.Load()
 	fileStorage.PeriodicBackup(5 * time.Second)

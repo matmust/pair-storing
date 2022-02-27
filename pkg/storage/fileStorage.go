@@ -12,18 +12,23 @@ import (
 
 type FileStorage struct {
 	repository pairStoring.PairRepository
+	path       string
 	filename   string
 }
 
 // NewFileStorage returns a new  instance of FileStorage.
-func NewFileStorage(filename string, repository pairStoring.PairRepository) *FileStorage {
-	return &FileStorage{filename: filename, repository: repository}
+func NewFileStorage(path string, filename string, repository pairStoring.PairRepository) *FileStorage {
+	return &FileStorage{path: path, filename: filename, repository: repository}
 }
 
 // Load, loads data to in-memory database from storage file if exists.
 func (fs *FileStorage) Load() error {
 
-	f, err := os.OpenFile(fs.filename, os.O_CREATE, os.ModePerm)
+	if _, err := os.Stat(fs.path + fs.filename); os.IsNotExist(err) {
+		os.MkdirAll(fs.path, 0700) // Create your file
+	}
+
+	f, err := os.OpenFile(fs.path+fs.filename, os.O_CREATE, os.ModePerm)
 
 	if err != nil {
 		fmt.Println("could not open file error:", err.Error())
@@ -44,7 +49,7 @@ func (fs *FileStorage) Load() error {
 // Store, backups data to storage file from in-memory database.
 func (fs *FileStorage) Store() error {
 
-	f, err := os.Create(fs.filename)
+	f, err := os.Create(fs.path + fs.filename)
 	if err != nil {
 		fmt.Println("could not open file error:", err.Error())
 		return err
