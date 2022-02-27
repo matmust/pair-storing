@@ -1,4 +1,4 @@
-package storage
+package json
 
 import (
 	"encoding/json"
@@ -10,19 +10,19 @@ import (
 	"github.com/matmust/pairStoring"
 )
 
-type FileStorage struct {
+type JsonStore struct {
 	repository pairStoring.PairRepository
 	path       string
 	filename   string
 }
 
-// NewFileStorage returns a new  instance of FileStorage.
-func NewFileStorage(path string, filename string, repository pairStoring.PairRepository) *FileStorage {
-	return &FileStorage{path: path, filename: filename, repository: repository}
+// NewJsonStore returns a new  instance of JsonStore.
+func NewJsonStore(path string, filename string, repository pairStoring.PairRepository) *JsonStore {
+	return &JsonStore{path: path, filename: filename, repository: repository}
 }
 
 // Load, loads data to in-memory database from storage file if exists.
-func (fs *FileStorage) Load() error {
+func (fs *JsonStore) Load() error {
 
 	if _, err := os.Stat(fs.path + fs.filename); os.IsNotExist(err) {
 		os.MkdirAll(fs.path, 0700) // Create your file
@@ -47,7 +47,7 @@ func (fs *FileStorage) Load() error {
 }
 
 // Store, backups data to storage file from in-memory database.
-func (fs *FileStorage) Store() error {
+func (fs *JsonStore) Store() error {
 
 	f, err := os.Create(fs.path + fs.filename)
 	if err != nil {
@@ -64,7 +64,7 @@ func (fs *FileStorage) Store() error {
 
 }
 
-func (fs *FileStorage) PeriodicBackup(duration time.Duration) {
+func (fs *JsonStore) PeriodicBackup(duration time.Duration) {
 	ticker := time.NewTicker(duration)
 
 	go func() {

@@ -10,9 +10,9 @@ import (
 	"github.com/matmust/pairStoring/pkg/flushing"
 	"github.com/matmust/pairStoring/pkg/getting"
 	"github.com/matmust/pairStoring/pkg/http/rest"
-	"github.com/matmust/pairStoring/pkg/inmem"
 	"github.com/matmust/pairStoring/pkg/setting"
-	"github.com/matmust/pairStoring/pkg/storage"
+	"github.com/matmust/pairStoring/pkg/storage/inmem"
+	jsonStorage "github.com/matmust/pairStoring/pkg/storage/json"
 )
 
 const (
@@ -30,10 +30,10 @@ func main() {
 	flag.Parse()
 
 	r := inmem.NewPairRepository()
-	fileStorage := storage.NewFileStorage(defaultFilePath, defaultFilename, r)
+	jsonStore := jsonStorage.NewJsonStore(defaultFilePath, defaultFilename, r)
 
-	fileStorage.Load()
-	fileStorage.PeriodicBackup(5 * time.Second)
+	jsonStore.Load()
+	jsonStore.PeriodicBackup(1 * time.Minute)
 
 	ss := setting.NewService(r)
 	gs := getting.NewService(r)
