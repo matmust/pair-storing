@@ -30,7 +30,6 @@ func (sh *settingHandler) SetHandle(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	value, err := io.ReadAll(r.Body)
-	// b, err := ioutil.ReadAll(resp.Body)  Go.1.15 and earlier
 	if err != nil {
 		http.Error(w, "value parsing error", http.StatusBadRequest)
 		return
