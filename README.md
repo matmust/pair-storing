@@ -40,6 +40,12 @@ ddocker run -d --name pair-storing -p 9000:9000  pair-storing
 docker-compose up
 ```
 
+## Heroku
+
+```
+https://pair-storing.herokuapp.com/
+```
+
 ## Try it!
 
 A RESTful API provides the following endpoints:
