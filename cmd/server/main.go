@@ -25,7 +25,7 @@ func main() {
 
 	var (
 		addr     = envString("PORT", defaultPort)
-		httpAddr = flag.String("http.addr", "127.0.0.1:"+addr, "HTTP listen address")
+		httpAddr = flag.String("http.addr", ":"+addr, "HTTP listen address")
 	)
 	flag.Parse()
 
@@ -41,7 +41,7 @@ func main() {
 
 	s := rest.NewServer(ss, gs, fls)
 
-	log.Printf("Server is starting up at http://127.0.0.1:%d/", 9000)
+	log.Printf("Server is starting up at port:%v", addr)
 
 	err := http.ListenAndServe(*httpAddr, logRequest(s))
 
