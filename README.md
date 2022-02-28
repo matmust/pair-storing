@@ -47,9 +47,9 @@ https://pair-storing.herokuapp.com/
 
 A RESTful API provides the following endpoints:
 
-* `GET /v1/pairs/:key`: returns the value of key if exists.
-* `PUT /v1/pairs/:key`: sets value of key if non-exists. Otherwise replace the value with the given value
-* `DELETE /v1/pairs`: deletes all key-value pairs
+* `GET /pairs/:key`: returns the value of key if exists.
+* `PUT /pairs/:key`: sets value of key if non-exists. Otherwise replace the value with the given value
+* `DELETE /pairs`: deletes all key-value pairs
 
 ## Project Layout
 
